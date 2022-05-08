@@ -12,7 +12,7 @@ def test_check_simple_search(web_browser):
     # результаты корректные:
     for title in page.products_titles.get_text():
         msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
-        assert page.search in title.lower(), msg
+        assert 'истори' in title.lower(), msg
 
 
 # 2 проверка сложного поискового запроса
@@ -25,7 +25,7 @@ def test_check_hard_search(web_browser):
     # результаты корректные:
     for title in page.products_titles.get_text():
         msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
-        assert page.search in title.lower(), msg
+        assert 'история искусств' or 'истории искусств' in title.lower(), msg
 
 
 # 3 проверка автозамены поискового запроса при ошибочной английской раскладке
@@ -68,7 +68,7 @@ def test_check_numbers_search(web_browser):
     # результаты поиска корректные:
     for title in page.products_titles.get_text():
         msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
-        assert page.search in title, msg
+        assert '1941' in title, msg
 
 
 # 6 проверка поиска при вводе символов
@@ -87,13 +87,14 @@ def test_check_electronic_books_search(web_browser):
     page = Search(web_browser)
     page.search = 'истори'
     page.search_run_button.click()
-    # убираем Прочие товары:
-    page.without_others_products_button.click()
     # убираем Бумажные книги:
     page.without_paper_books_button.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
+    # убираем Прочие товары:
+    page.without_others_products_button.click()
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
-    assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
+    assert page.products_titles_electronic.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
     for title in page.products_types.get_text():
         msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
@@ -107,9 +108,10 @@ def test_check_paper_books_search(web_browser):
     page.search_run_button.click()
     # убираем Электронные книги:
     page.without_electronic_books_button.click()
-    # убираем Бумажные книги:
-    page.without_paper_books_button.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.pytest.web_driver.implicitly_wait(5)
+    # убираем Прочие товары:
+    page.without_others_products_button.click()
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -125,19 +127,14 @@ def test_check_other_goods_search(web_browser):
     page = Search(web_browser)
     page.search = 'истори'
     page.search_run_button.click()
+    # убираем Бумажные книги:
+    page.without_paper_books_button.click()
+    #web_browser.web_driver.implicitly_wait(5)
     # убираем Электронные книги:
     page.without_electronic_books_button.click()
-    # убираем Прочие товары:
-    page.without_others_products_button.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
-    # результаты поиска корректные:
-    for title in page.products_types.get_text():
-        msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
-        assert ('электронная' not in title.lower()) or \
-               ('CD' in title.lower()) or \
-               ('DVD' in title.lower()), msg
 
 
 # 10 проверка поиска по фильтру-кнопке В наличии
@@ -147,11 +144,13 @@ def test_check_in_stock_search(web_browser):
     page.search_run_button.click()
     # убираем Предзаказ:
     page.sort_products_by_type_order.click()
+    #web_browser.web_driver.implicitly_wait(5)
     # убираем Ожидаются:
     page.sort_products_by_type_waiting.click()
+    #web_browser.web_driver.implicitly_wait(5)
     # убираем Нет в продаже:
     page.sort_products_by_type_out_of_stock.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -167,11 +166,13 @@ def test_check_preorder_search(web_browser):
     page.search_run_button.click()
     # убираем В наличии:
     page.sort_products_by_type_in_stock_is.click()
+    #web_browser.web_driver.implicitly_wait(5)
     # убираем Ожидаются:
     page.sort_products_by_type_waiting.click()
+    #web_browser.web_driver.implicitly_wait(5)
     # убираем Нет в продаже:
     page.sort_products_by_type_out_of_stock.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -187,11 +188,13 @@ def test_check_expected_search(web_browser):
     page.search_run_button.click()
     # убираем В наличии:
     page.sort_products_by_type_in_stock_is.click()
+    #web_browser.web_driver.implicitly_wait(5)
     # убираем Предзаказ:
     page.sort_products_by_type_order.click()
+    #web_browser.web_driver.implicitly_wait(5)
     # убираем Нет в продаже:
     page.sort_products_by_type_out_of_stock.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -205,13 +208,17 @@ def test_check_not_on_sale_search(web_browser):
     page = Search(web_browser)
     page.search = 'истори'
     page.search_run_button.click()
+    # скроллим меню с прокруткой
+    page.scroll_menu.scroll_to_element()
     # убираем В наличии:
     page.sort_products_by_type_in_stock_is.click()
+    #web_browser.web_driver.implicitly_wait(5)
     # убираем Предзаказ:
     page.sort_products_by_type_order.click()
+    #web_browser.web_driver.implicitly_wait(5)
     # убираем Ожидаются:
     page.sort_products_by_type_waiting.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -233,11 +240,11 @@ def test_check_electronic_books_search_menu(web_browser):
     page.other_goods.click()
     # нажимаем на Показать:
     page.show_button.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
-    for title in page.products_types.get_text():
+    for title in page.products_types_electronic.get_text():
         msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
         assert 'электронная' in title.lower(), msg
 
@@ -255,7 +262,7 @@ def test_check_paper_books_search_menu(web_browser):
     page.other_goods.click()
     # нажимаем Показать:
     page.show_button.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -279,7 +286,7 @@ def test_check_other_goods_search_menu(web_browser):
     page.electronic_books.click()
     # нажимаем Показать:
     page.show_button.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -305,11 +312,11 @@ def test_check_in_stock_search_menu(web_browser):
     page.out_of_stock.click()
     # нажимаем на Показать:
     page.show_button_stock.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
-    for title in page.products_types.get_text():
+    for title in page.products_types_basket.get_text():
         msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
         assert 'корзин' in title.lower(), msg
 
@@ -329,7 +336,7 @@ def test_check_pre_order_search_menu(web_browser):
     page.out_of_stock.click()
     # нажимаем Показать:
     page.show_button_stock.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -353,7 +360,7 @@ def test_check_waiting_search_menu(web_browser):
     page.out_of_stock.click()
     # нажимаем Показать:
     page.show_button_stock.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -377,11 +384,11 @@ def test_check_out_of_stock_search_menu(web_browser):
     page.waiting.click()
     # нажимаем на Показать:
     page.show_button_stock.click()
-    pytest.driver.implicitly_wait(5)
+    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
-    for title in page.products_types.get_text():
+    for title in page.products_types_not_in_stock.get_text():
         msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
         assert 'нет в продаже' in title.lower(), msg
 
@@ -398,7 +405,7 @@ def test_check_author_search(web_browser):
     # результаты поиска корректные:
     for title in page.authors_names.get_text():
         msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
-        assert page.search in title.lower(), msg
+        assert 'молот' in title.lower(), msg
     # нажимаем первого автора в списке:
     page.our_author_button.click()
     # результаты вывода корректные:
@@ -428,7 +435,7 @@ def test_check_publishing_houses_search(web_browser):
     title = page.page_title.get_text()
     msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
     assert 'эком' in title.lower(), msg
-    assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
+    assert page.products_titles_publishing.count() >= 1, 'Не найдено ни одного результата по запросу'
 
 
 # 23 проверка поиска по значению в фильтре Серии
@@ -449,7 +456,7 @@ def test_check_series_search(web_browser):
     # результаты вывода корректные:
     title = page.page_title.get_text()
     msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
-    assert 'marvel — избранное' in title.lower(), msg
+    assert 'избранное' in title.lower(), msg
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
 
 

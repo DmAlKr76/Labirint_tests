@@ -202,6 +202,7 @@ class WebElement(object):
         # Scroll page to the element:
         # Option #1 to scroll to element:
         self._web_driver.execute_script("arguments[0].scrollIntoView();", element)
+        #self._web_driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
         # Option #2 to scroll to element:
         try:
@@ -297,4 +298,5 @@ class ManyWebElements(WebElement):
 
         # Make screen-shot of the page:
         self._web_driver.save_screenshot(file_name)
+
 

@@ -30,7 +30,7 @@ def pytest_runtest_makereport(item, call):
 def web_browser(request, selenium):
     browser = selenium
     browser.set_window_size(1400, 1000)
-
+    # browser.maximize_window()
     # Return browser instance to test case:
     yield browser
 

@@ -107,7 +107,7 @@ def test_help_click(web_browser):
 def test_certificates_click(web_browser):
     page = MainPageHeader(web_browser)
     page.certificates.click()
-    assert page.get_current_url() == 'https://www.labirint.ru/certificates/'
+    assert page.get_current_url() == 'https://www.labirint.ru/top/certificates/'
 
 
 # 16 проверка перехода в Рейтинги

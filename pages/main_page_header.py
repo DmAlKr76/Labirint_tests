@@ -28,7 +28,7 @@ class MainPageHeader(WebPage):
     agreement = WebElement(
         xpath='//*[@class="b-header-e-icon-adult b-header-e-icon-adult-m-big b-header-e-sprite-background"]')
     # кнопка Что читать? Рекомендуем
-    now = WebElement(xpath='//*[@id ="minwidth"]/div[6]/div/div[1]/div[1]/div/a[2]/span[2]/span/span')
+    now = WebElement(xpath='//*[@id="minwidth"]/div[5]/div/div[1]/div[1]/div/a[2]/span[2]/span/span')
     # кнопка Книги
     books = WebElement(xpath='//span[@class="b-header-b-menu-e-link top-link-menu first-child"]')
     # кнопка Главное 2022
