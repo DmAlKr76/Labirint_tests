@@ -89,10 +89,8 @@ def test_check_electronic_books_search(web_browser):
     page.search_run_button.click()
     # убираем Бумажные книги:
     page.without_paper_books_button.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # убираем Прочие товары:
     page.without_others_products_button.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles_electronic.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -108,10 +106,8 @@ def test_check_paper_books_search(web_browser):
     page.search_run_button.click()
     # убираем Электронные книги:
     page.without_electronic_books_button.click()
-    #web_browser.pytest.web_driver.implicitly_wait(5)
     # убираем Прочие товары:
     page.without_others_products_button.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -129,10 +125,8 @@ def test_check_other_goods_search(web_browser):
     page.search_run_button.click()
     # убираем Бумажные книги:
     page.without_paper_books_button.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # убираем Электронные книги:
     page.without_electronic_books_button.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
 
@@ -144,13 +138,10 @@ def test_check_in_stock_search(web_browser):
     page.search_run_button.click()
     # убираем Предзаказ:
     page.sort_products_by_type_order.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # убираем Ожидаются:
     page.sort_products_by_type_waiting.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # убираем Нет в продаже:
     page.sort_products_by_type_out_of_stock.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -166,13 +157,10 @@ def test_check_preorder_search(web_browser):
     page.search_run_button.click()
     # убираем В наличии:
     page.sort_products_by_type_in_stock_is.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # убираем Ожидаются:
     page.sort_products_by_type_waiting.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # убираем Нет в продаже:
     page.sort_products_by_type_out_of_stock.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -188,13 +176,10 @@ def test_check_expected_search(web_browser):
     page.search_run_button.click()
     # убираем В наличии:
     page.sort_products_by_type_in_stock_is.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # убираем Предзаказ:
     page.sort_products_by_type_order.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # убираем Нет в продаже:
     page.sort_products_by_type_out_of_stock.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -212,13 +197,10 @@ def test_check_not_on_sale_search(web_browser):
     page.scroll_menu.scroll_to_element()
     # убираем В наличии:
     page.sort_products_by_type_in_stock_is.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # убираем Предзаказ:
     page.sort_products_by_type_order.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # убираем Ожидаются:
     page.sort_products_by_type_waiting.click()
-    #web_browser.driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -240,7 +222,6 @@ def test_check_electronic_books_search_menu(web_browser):
     page.other_goods.click()
     # нажимаем на Показать:
     page.show_button.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -262,7 +243,6 @@ def test_check_paper_books_search_menu(web_browser):
     page.other_goods.click()
     # нажимаем Показать:
     page.show_button.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -286,7 +266,6 @@ def test_check_other_goods_search_menu(web_browser):
     page.electronic_books.click()
     # нажимаем Показать:
     page.show_button.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -312,7 +291,6 @@ def test_check_in_stock_search_menu(web_browser):
     page.out_of_stock.click()
     # нажимаем на Показать:
     page.show_button_stock.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -336,7 +314,6 @@ def test_check_pre_order_search_menu(web_browser):
     page.out_of_stock.click()
     # нажимаем Показать:
     page.show_button_stock.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -360,7 +337,6 @@ def test_check_waiting_search_menu(web_browser):
     page.out_of_stock.click()
     # нажимаем Показать:
     page.show_button_stock.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -384,7 +360,6 @@ def test_check_out_of_stock_search_menu(web_browser):
     page.waiting.click()
     # нажимаем на Показать:
     page.show_button_stock.click()
-    #web_browser.web_driver.implicitly_wait(5)
     # найдено не менее одного результата:
     assert page.products_titles.count() >= 1, 'Не найдено ни одного результата по запросу'
     # результаты поиска корректные:
@@ -518,12 +493,6 @@ def test_check_reviews_search(web_browser):
     for title in page.reviews_products.get_text():
         msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
         assert 'цветы' in title.lower() or 'цвет' in title.lower(), msg
-    # # нажимаем на первую тему:
-    # page.review_button.click()
-    # # результаты вывода корректные:
-    # title = page.page_title.get_text()
-    # msg = 'Неверный результат поисковой выдачи "{}"'.format(title)
-    # assert 'цветы' in title.lower(), msg
 
 
 # 27 проверка поиска по значению в фильтре Новости

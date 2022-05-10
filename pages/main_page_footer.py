@@ -1,8 +1,7 @@
 import os
 
 from pages.base import WebPage
-from pages.elements import WebElement, ManyWebElements
-from selenium.webdriver.common.by import By
+from pages.elements import WebElement
 
 
 class MainPageFooter(WebPage):
@@ -22,6 +21,8 @@ class MainPageFooter(WebPage):
     # app_store = WebElement(
     #     xpath='//*[@class="b-rfooter-e-logo b-rfooter-e-logo-appstore analytics-click-js" '
     #           'and contains(text(),"App Store")]')
+    # app_store = WebElement(
+    #     xpath='//*[@id="body-top"]/div[5]/div[2]/div/div[1]/div[1]/div[2]/a[1]')
     app_store = WebElement(
         xpath='//a[@class="b-rfooter-e-section-title b-rfooter-visible-320" '
               'and contains(href(),"https://apps.apple.com/ru/app/лабиринт-ру-книжный-магазин/id1008650482")]')
